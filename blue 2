@@ -1,0 +1,39 @@
+def c_sub(encoded_text):
+   
+    accumulator = encoded_text
+
+    
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+    
+    while True:
+        
+        print("Encoded Text:", accumulator)
+
+      
+        letter_counts = {letter: accumulator.lower().count(letter.lower()) for letter in alphabet}
+
+        # Print letter occurrences
+        print("Letter Occurrences:")
+        for letter, count in letter_counts.items():
+            print(f"{letter}: {count}")
+
+        
+        print("Reminder: Common English letters are usually ETAOINSHRDLU")
+
+       
+        user_input = input("Type a pair of letters to swap (e.g., BE to swap B and E), or type 'quit': ").upper()
+
+       
+        if user_input == 'QUIT' or "quit":
+            print("Exiting the loop. Final encoded text:", accumulator)
+            break
+
+        
+        if len(user_input) == 2 and user_input.isalpha():
+           
+            accumulator = accumulator.replace(user_input[0].lower(), '_').replace(user_input[1].lower(), user_input[0].lower()).replace('_', user_input[1].lower())
+            accumulator = accumulator.replace(user_input[0].upper(), '_').replace(user_input[1].upper(), user_input[0].upper()).replace('_', user_input[1].upper())
+        else:
+            print("Invalid input. Please enter a valid pair of letters or 'quit'.")
+print(c_sub("Etdqwzfpb rpf gnepfcguxv krbz, reewprzf, rnc bzwqgc. Owdrn ufgnyb rpf gnepfcguxv bxth, gnreewprzf, rnc upgxxgrnz. Ztyfzofp zofv rpf qthfpkwx ufvtnc gdrygnrzgtn. -Rxufpz Fgnbzfgn, qovbgegbz"))
