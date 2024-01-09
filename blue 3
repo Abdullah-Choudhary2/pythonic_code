@@ -1,0 +1,67 @@
+alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+def vigenere_encode(message, key):
+    encoded_message = ""
+    key_length = len(key)
+   
+    for i in range(len(message)):
+        if message[i] in alpha:
+            # Find corresponding keyword letter
+            keyword_letter = key[i % key_length]
+           
+            # Convert letters to numbers
+            message_number = alpha.index(message[i])
+            keyword_number = alpha.index(keyword_letter)
+           
+            # Add the numbers, take the sum % 26
+            encrypted_number = (message_number + keyword_number) % 26
+           
+            # Find the letter at the encrypted number index
+            encrypted_letter = alpha[encrypted_number]
+           
+            # Append the letter to the encoded message
+            encoded_message += encrypted_letter
+        else:
+            # If the character is not in the alphabet, keep it unchanged
+            encoded_message += message[i]
+
+    return encoded_message
+
+def vigenere_decode(message, key):
+    decoded_message = ""
+    key_length = len(key)
+   
+    for i in range(len(message)):
+        if message[i] in alpha:
+            # Find corresponding keyword letter
+            keyword_letter = key[i % key_length]
+           
+            # Convert letters to numbers
+            message_number = alpha.index(message[i])
+            keyword_number = alpha.index(keyword_letter)
+           
+            # Subtract the numbers, take the result % 26
+            decrypted_number = (message_number - keyword_number) % 26
+           
+            # Find the letter at the decrypted number index
+            decrypted_letter = alpha[decrypted_number]
+           
+            # Append the letter to the decoded message
+            decoded_message += decrypted_letter
+        else:
+            # If the character is not in the alphabet, keep it unchanged
+            decoded_message += message[i]
+
+    return decoded_message
+pt="THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG"
+key="TEST"
+ct=vigenere_encode(pt,key)
+dt=vigenere_decode(ct,key)
+print(ct,dt)
+print("\n")
+
+pt="SPHINXOFBLACKQUARTZJUDGEMYVOW"
+key="KEYWORD"
+ct=vigenere_encode(pt,key)
+dt=vigenere_decode(ct,key)
+print(ct,dt)
